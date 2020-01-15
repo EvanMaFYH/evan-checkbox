@@ -7,7 +7,7 @@ uniapp复选框组件，支持双向数据绑定，支持自定义icon
 ```
 <template>
     <evan-checkbox v-model="checked">复选框</evan-checkbox>
-    <evan-checkbox-group @change="onGroupChange" v-model="color">
+    <evan-checkbox-group v-model="color">
         <evan-checkbox ﻿v-for="item in colorList" :key="item.value" :label="item.value">﻿{{item.label}}</evan-checkbox>
     </evan-checkbox-group>
 </template>
@@ -40,14 +40,6 @@ export default{
             ]
         }
     }
-    methods:{
-        toggleCheckbox(index) {
-            this.$refs.listCheckbox[index].toggle()
-        },
-        onGroupChange(){
-        
-        }
-    }
 }
 </script>
 ```
@@ -62,7 +54,7 @@ export default{
 <evan-checkbox v-model="checked">复选框</evan-checkbox>
 <evan-checkbox v-model="checked"><text class="your-class">复选框</text></evan-checkbox>
 ```
-#### 2.通过slot方式自定义图标时如果不是两种图标的切换而是某个图标的显示与隐藏，在外层套一个view，不然在h5下有问题
+#### 2.通过slot方式自定义图标时两种状态如果是某个图标的显示与隐藏，在外层套一个view，不然在h5下有问题
 ```
 <evan-checkbox v-model="checked">
     完全自定义图标
@@ -84,7 +76,7 @@ export default{
 
 ### evan-checkbox props
 | 参数           | 说明            | 类型    | 可选值     | 默认值  |    
-| :------------- | :------------------------------ | :------ | :----- | :--- |  
+| :-------------------- | :------------------------------ | :---------- | :-------- | :--- |  
 | v-model | 是否选中 | boolean | - | false |
 | shape | 在非自定icon模式下图标的形状 | string | round/square | round |
 | label | 选中状态的值，只在group模式下有效 | string｜number | - | - |
@@ -100,7 +92,7 @@ export default{
 | :--- | :---------------- | ------------------|
 | change | 选中状态发生变更 | 更新后的选中状态 |
 
-﻿### evan-checkbox methods
+### evan-checkbox methods
 | 方法名   | 说明       | 参数     |   
 | :--------------- | :------------------------------------ | :-------|
 | toggle | 切换复选框的选中状态，一般配合prevent-click属性使用来自定义样式 | - |
