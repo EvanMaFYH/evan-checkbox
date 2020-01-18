@@ -108,3 +108,8 @@ export default{
 | v-model | 选中项的label | array | - | - |
 | disabled | 是否禁用 | boolean | - | false |
 | max | 最多选中的个数 | number | - | - |
+
+### evan-checkbox-group events
+| name | 说明 | 回调参数 |
+| :--- | :---------------- | ------------------|
+| change | 选中状态发生变更 | 更新后选中值的label组 |
