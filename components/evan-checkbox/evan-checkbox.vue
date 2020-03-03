@@ -77,7 +77,7 @@
 			isOverLimit() {
 				if (this.isGroup) {
 					let parent = this.getParent()
-					if (parent.max || parent.max === 0) {
+					if (parent.max) {
 						let parentValue = parent.value || []
 						if (parentValue.length >= parent.max) {
 							return true

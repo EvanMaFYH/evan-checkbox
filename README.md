@@ -74,6 +74,28 @@ export default{
 </evan-checkbox>
 ```
 
+#### 3.demo项目需要安装依赖，记得先npm install，因为加入了与EvanForm组件配合使用的例子
+
+#### 4.EvanCheckboxPopup中使用到了解构插槽，目前uniapp似乎在这一块问题还比较多，如果要在同一个页面使用多个EvanCheckboxPopup组件时记得要import多个，不然目前slot中的内容会被后面的影响，目前我觉得应该框架内部的问题，如果是组件代码造成的欢迎指出
+```
+<evan-checkbox-popup></evan-checkbox-popup>
+<evan-checkbox-popup2></evan-checkbox-popup2>
+<evan-checkbox-popup3></evan-checkbox-popup3>
+
+import EvanCheckboxPopup from '@/components/evan-checkbox/evan-checkbox-popup.vue'
+import EvanCheckboxPopup2 from '@/components/evan-checkbox/evan-checkbox-popup.vue'
+import EvanCheckboxPopup3 from '@/components/evan-checkbox/evan-checkbox-popup.vue'
+export default{
+    components:{
+        EvanCheckboxGroup,
+        EvanCheckboxPopup2,
+        EvanCheckboxPopup3
+    }
+}
+```
+
+#### 5.如果层级出现问题去调一下uniPopup组件的层级试试（uniPopup组件推荐将popup写在其他元素后面，但是目前是在组件中的，简单测试下没发现层级问题）
+
 ### evan-checkbox props
 | 参数           | 说明            | 类型    | 可选值     | 默认值  |    
 | :-------------------- | :------------------------------ | :---------- | :-------- | :--- |  
@@ -113,3 +135,29 @@ export default{
 | name | 说明 | 回调参数 |
 | :--- | :---------------- | ------------------|
 | change | 选中状态发生变更 | 更新后选中值的label组 |
+
+### evan-checkbox-popup props   
+| 参数           | 说明            | 类型    | 可选值     | 默认值  |    
+| :------------- | :------------------------------ | :------ | :----- | :--- |  
+| v-model | 选中项的label | array | - | - |
+| options | 选项数组 | array | - | - |
+| optionLabel | 选项数组中显示内容对应键名 | string | - | label |
+| optionValue | 选项数组中value内容对应键名 | string | - | value |
+| primary-color | 主题色 | string | - | #108ee9 |
+| cancelText | 取消按钮的文字 | string | - | 取消 |
+| confirmText | 确定按钮的文字 | string | - | 确定 |
+| title | 标题的文字 | string | - | 请选择 |
+| max | 最多选中的个数 | number | - | - |
+| labelSeparator | 传递给父组件的当前选中值以什么符号分隔（目前uniapp只支持解构插槽） | string | - | , |
+| maskClick | 点击遮罩层是否关闭 | boolean | - | true |
+
+### evan-checkbox-popup slot
+| name | 说明 |
+| :--- | :---------------- |
+| trigger | 触发选项弹窗的元素 |
+
+### evan-checkbox-popup events
+| name | 说明 | 回调参数 |
+| :--- | :---------------- | ------------------|
+| confirm | 点击确定的回调 | 点击确定时选中值的value数组 |
+| cancel | 取消关闭弹窗时的回调（包括点击遮罩层关闭）| 关闭时选中值的value数组 |

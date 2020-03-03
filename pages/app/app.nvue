@@ -51,17 +51,60 @@
 				<evan-checkbox :label="item.value"><text class="evan-checkbox-show__label">{{item.label}}</text></evan-checkbox>
 			</view>
 		</evan-checkbox-group>
-		<button @click="changeValue">修改</button>
+
+		<view class="evan-checkbox-show__title">
+			<text class="evan-checkbox-show__title__item">popup模式基本用法</text>
+		</view>
+
+		<evan-checkbox-popup @confirm="onConfirm" v-model="colorPopup" :options="colorList">
+			<template v-slot:trigger="{label}">
+				<view>{{label||'请选择'}}</view>
+			</template>
+		</evan-checkbox-popup>
+
+		<view class="evan-checkbox-show__title">
+			<text class="evan-checkbox-show__title__item">popup模式自定义颜色</text>
+		</view>
+
+		<evan-checkbox-popup2 primaryColor="#00a231" @confirm="onConfirm" v-model="colorPopup" :options="colorList"
+		 v-slot:trigger="{label}">
+			<view>{{label||'请选择'}}</view>
+		</evan-checkbox-popup2>
+
+		<view class="evan-checkbox-show__title">
+			<text class="evan-checkbox-show__title__item">popup模式限制最多选中个数</text>
+		</view>
+
+		<evan-checkbox-popup3 :max="3" @confirm="onConfirm" v-model="colorPopup" :options="colorList" v-slot:trigger="{label}">
+			<view>{{label||'请选择'}}</view>
+		</evan-checkbox-popup3>
+
+		<view class="evan-checkbox-show__title">
+			<text class="evan-checkbox-show__title__item">popup模式自定义分隔符</text>
+		</view>
+
+		<evan-checkbox-popup4 labelSeparator="/" @confirm="onConfirm" v-model="colorPopup" :options="colorList"
+		 v-slot:trigger="{label}">
+			<view>{{label||'请选择'}}</view>
+		</evan-checkbox-popup4>
 	</view>
 </template>
 
 <script>
 	import EvanCheckbox from '@/components/evan-checkbox/evan-checkbox.vue'
 	import EvanCheckboxGroup from '@/components/evan-checkbox/evan-checkbox-group.vue'
+	import EvanCheckboxPopup from '@/components/evan-checkbox/evan-checkbox-popup.vue'
+	import EvanCheckboxPopup2 from '@/components/evan-checkbox/evan-checkbox-popup.vue'
+	import EvanCheckboxPopup3 from '@/components/evan-checkbox/evan-checkbox-popup.vue'
+	import EvanCheckboxPopup4 from '@/components/evan-checkbox/evan-checkbox-popup.vue'
 	export default {
 		components: {
 			EvanCheckbox,
-			EvanCheckboxGroup
+			EvanCheckboxGroup,
+			EvanCheckboxPopup,
+			EvanCheckboxPopup2,
+			EvanCheckboxPopup3,
+			EvanCheckboxPopup4
 		},
 		data() {
 			return {
@@ -74,6 +117,7 @@
 				disabledChecked: true,
 				disabledUnChecked: false,
 				color: ['green'],
+				colorPopup: null,
 				colorList: [{
 						label: '红色',
 						value: 'red'
@@ -93,7 +137,7 @@
 					{
 						label: '黑色',
 						value: 'black'
-					},
+					}
 				]
 			}
 		},
@@ -104,12 +148,10 @@
 			onGroupChange() {
 				console.log(this.color)
 			},
-			goNvue() {
-
+			onConfirm(e) {
+				console.log('confirm')
+				console.log(e)
 			},
-			changeValue() {
-				this.color = ['red']
-			}
 		}
 	}
 </script>
