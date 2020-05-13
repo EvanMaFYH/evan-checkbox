@@ -168,6 +168,7 @@ export default{
 | name | 说明 | 回调参数 |
 | :--- | :---------------- | ------------------|
 | confirm | 点击确定的回调 | 点击确定时选中值的value数组 |
+| objConfirm | 点击确定的回调 | 点击确定时选中的选项数组 |
 | cancel | 取消关闭弹窗时的回调（包括点击遮罩层关闭）| 关闭时选中值的value数组 |
 
 ### evan-checkbox-popup methods

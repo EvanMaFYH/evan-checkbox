@@ -95,7 +95,8 @@
 			<text class="evan-checkbox-show__title__item">popup模式基本用法</text>
 		</view>
 
-		<evan-checkbox-popup1 @confirm="onConfirm" @cancel="onCancel" v-model="colorPopup1" :options="colorList">
+		<evan-checkbox-popup1 @confirm="onConfirm" @objConfirm="onObjConfirm" @cancel="onCancel" v-model="colorPopup1"
+		 :options="colorList">
 			<template v-slot:trigger="{label}">
 				<view>{{label||'请选择'}}</view>
 			</template>
@@ -263,6 +264,9 @@
 			},
 			onConfirm(e) {
 				console.log('confirm')
+				console.log(e)
+			},
+			onObjConfirm(e) {
 				console.log(e)
 			},
 			onCancel(e) {

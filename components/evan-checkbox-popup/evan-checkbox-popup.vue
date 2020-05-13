@@ -122,14 +122,10 @@
 			},
 			onConfirm() {
 				this.closePopup()
-				const label = this.options.filter((op) => this.currentValue && this.currentValue.includes(op[this.optionValue])).map(
-					(item) => item[this.optionLabel])
+				const objArr = this.options.filter((op) => this.currentValue && this.currentValue.includes(op[this.optionValue]))
 				this.$emit('input', this.currentValue)
 				this.$emit('confirm', this.currentValue)
-				this.$emit('objConfirm', {
-					label,
-					value: this.currentValue
-				})
+				this.$emit('objConfirm', objArr)
 			},
 			toggleCheckbox(index) {
 				this.$refs.checkbox[index].toggle()
