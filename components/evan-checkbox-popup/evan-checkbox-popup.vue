@@ -2,6 +2,7 @@
 	<view class="evan-checkbox-popup">
 		<view class="evan-checkbox-popup__trigger" @click="openPopup">
 			<slot name="trigger" :label="label"></slot>
+			<slot></slot>
 		</view>
 		<uni-popup @change="onPopupChange" ref="popup" type="bottom" :maskClick="maskClick">
 			<view class="evan-checkbox-popup__target">
@@ -14,12 +15,13 @@
 					<evan-checkbox-group :max="max" v-model="currentValue">
 						<view @click="toggleCheckbox(index)" class="evan-checkbox-popup__target__body__listitem" v-for="(item,index) in options"
 						 :key="item[optionValue]">
-							<text class="evan-checkbox-popup__target__body__listitem__label" :style="{color:currentValue&&currentValue.includes(item[optionValue])?primaryColor:'#333'}">{{item[optionLabel]}}</text>
+							<text class="evan-checkbox-popup__target__body__listitem__label" :style="{color:isChecked(item[optionValue])?primaryColor:'#333'}">{{item[optionLabel]}}</text>
 							<evan-checkbox :primaryColor="primaryColor" ref="checkbox" :preventClick="true" :label="item[optionValue]">
 								<template slot="icon">
 									<view>
-										<uni-icons v-if="currentValue&&currentValue.includes(item[optionValue])" type="checkmarkempty" size="30"
-										 :color="primaryColor"></uni-icons>
+										<template v-if="isChecked(item[optionValue])">
+											<uni-icons type="checkmarkempty" size="25" :color="primaryColor"></uni-icons>
+										</template>
 									</view>
 								</template>
 							</evan-checkbox>
@@ -34,7 +36,7 @@
 <script>
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import EvanCheckbox from '@/components/evan-checkbox/evan-checkbox.vue'
-	import EvanCheckboxGroup from '@/components/evan-checkbox/evan-checkbox-group.vue'
+	import EvanCheckboxGroup from '@/components/evan-checkbox-group/evan-checkbox-group.vue'
 	export default {
 		name: 'EvanCheckboxPopup',
 		components: {
@@ -120,8 +122,14 @@
 			},
 			onConfirm() {
 				this.closePopup()
+				const label = this.options.filter((op) => this.currentValue && this.currentValue.includes(op[this.optionValue])).map(
+					(item) => item[this.optionLabel])
 				this.$emit('input', this.currentValue)
 				this.$emit('confirm', this.currentValue)
+				this.$emit('objConfirm', {
+					label,
+					value: this.currentValue
+				})
 			},
 			toggleCheckbox(index) {
 				this.$refs.checkbox[index].toggle()
@@ -134,12 +142,29 @@
 					}
 					this.maskClose = true
 				}
+			},
+			isChecked(value) {
+				return this.currentValue && this.currentValue.includes(value)
+			},
+			selectAll() {
+				this.currentValue = this.options.map((item) => item[this.optionValue])
+				this.$emit('input', this.currentValue)
+			},
+			selectReverse() {
+				let current = Object.assign([], this.currentValue)
+				this.currentValue = this.options.filter((item) => !current.includes(item[this.optionValue])).map((item) => item[
+					this.optionValue])
+				this.$emit('input', this.currentValue)
+			},
+			clearAll() {
+				this.currentValue = []
+				this.$emit('input', this.currentValue)
 			}
 		}
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.evan-checkbox-popup {}
 
 	.evan-checkbox-popup__target {}

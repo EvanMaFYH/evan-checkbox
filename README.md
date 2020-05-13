@@ -76,7 +76,7 @@ export default{
 
 #### 3.demo项目需要安装依赖，记得先npm install，因为加入了与EvanForm组件配合使用的例子
 
-#### 4.EvanCheckboxPopup中使用到了解构插槽，目前uniapp似乎在这一块问题还比较多，如果要在同一个页面使用多个EvanCheckboxPopup组件时记得要import多个，不然目前slot中的内容会被后面的影响，目前我觉得应该框架内部的问题，如果是组件代码造成的欢迎指出
+#### 4.EvanCheckboxPopup中使用到了解构插槽，目前uniapp似乎在这一块问题还比较多，如果要在同一个页面使用多个EvanCheckboxPopup组件时记得要import多个，不然目前slot中的内容的样式除了第一个都会被最后一个影响，预计官方在下个版本修复，参考[这里](https://github.com/dcloudio/uni-app/issues/1662)
 ```
 <evan-checkbox-popup></evan-checkbox-popup>
 <evan-checkbox-popup2></evan-checkbox-popup2>
@@ -94,7 +94,7 @@ export default{
 }
 ```
 
-#### 5.如果层级出现问题去调一下uniPopup组件的层级试试（uniPopup组件推荐将popup写在其他元素后面，但是目前是在组件中的，简单测试下没发现层级问题）
+#### 5.如果层级出现问题去调一下uniPopup组件的层级试试（uniPopup组件推荐将popup写在其他元素后面，但是目前是在组件中的，因此如果嵌套比较深可能无法弹出）
 
 ### evan-checkbox props
 | 参数           | 说明            | 类型    | 可选值     | 默认值  |    
@@ -136,6 +136,13 @@ export default{
 | :--- | :---------------- | ------------------|
 | change | 选中状态发生变更 | 更新后选中值的label组 |
 
+### evan-checkbox-group methods
+| 方法名   | 说明       | 参数     |   
+| :--------------- | :------------------------------------ | :-------|
+| selectAll | 全选，注意主动调用该方法不会触发change事件 | - |
+| selectReverse | 反选，注意主动调用该方法不会触发change事件 | - |
+| clearAll | 清空，注意主动调用该方法不会触发change事件 | - |
+
 ### evan-checkbox-popup props   
 | 参数           | 说明            | 类型    | 可选值     | 默认值  |    
 | :------------- | :------------------------------ | :------ | :----- | :--- |  
@@ -154,10 +161,18 @@ export default{
 ### evan-checkbox-popup slot
 | name | 说明 |
 | :--- | :---------------- |
-| trigger | 触发选项弹窗的元素 |
+| - | 触发选项弹窗的元素 |
+| trigger | 触发选项弹窗的元素，会返回给父组件当前选中项的显示值 |
 
 ### evan-checkbox-popup events
 | name | 说明 | 回调参数 |
 | :--- | :---------------- | ------------------|
 | confirm | 点击确定的回调 | 点击确定时选中值的value数组 |
 | cancel | 取消关闭弹窗时的回调（包括点击遮罩层关闭）| 关闭时选中值的value数组 |
+
+### evan-checkbox-popup methods
+| 方法名   | 说明       | 参数     |   
+| :--------------- | :------------------------------------ | :-------|
+| selectAll | 全选，注意主动调用该方法不会触发change事件 | - |
+| selectReverse | 反选，注意主动调用该方法不会触发change事件 | - |
+| clearAll | 清空，注意主动调用该方法不会触发change事件 | - |

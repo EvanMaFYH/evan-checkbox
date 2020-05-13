@@ -3,7 +3,7 @@
 		<slot v-if="$slots.icon" name="icon"></slot>
 		<template v-else>
 			<uni-icons v-if="icon" :type="icon" :size="iconSize" :color="iconColor"></uni-icons>
-			<view v-else class="evan-checkbox__inner" :class="['evan-checkbox__inner--'+shape]" :style="{width:iconSize+'px',height:iconSize+'px',backgroundColor:innerBackgroundColor,borderColor:innerBorderColor}">
+			<view v-else class="evan-checkbox__inner" :class="['evan-checkbox__inner--'+shape]" :style="{width:iconSize+4+'px',height:iconSize+4+'px',backgroundColor:innerBackgroundColor,borderColor:innerBorderColor}">
 				<uni-icons v-if="currentValue" type="checkmarkempty" :size="iconSize" :color="isDisabled?'#c8c9cc':'#fff'"></uni-icons>
 			</view>
 		</template>
@@ -43,7 +43,7 @@
 			},
 			iconSize: {
 				type: Number,
-				default: 20
+				default: 16
 			},
 			primaryColor: {
 				type: String,
@@ -155,16 +155,19 @@
 				}
 				return null
 			},
+			// 点击触发
 			onCheckboxChange() {
 				if (!this.isDisabled && !this.preventClick && (!this.isOverLimit || this.currentValue)) {
 					this.toggleValue()
 				}
 			},
+			// 主动调用方法触发
 			toggle() {
 				if (!this.isDisabled && (!this.isOverLimit || this.currentValue)) {
 					this.toggleValue()
 				}
 			},
+			// 切换状态
 			toggleValue() {
 				this.currentValue = !this.currentValue
 				this.$emit('input', this.currentValue)
@@ -174,9 +177,26 @@
 					parent.onCheckboxChange(this.label)
 				}
 			},
+			// 根据EvanCheckboxGroup组件的值设置当前checkbox的值
 			setValue(groupValue) {
 				groupValue = groupValue || []
 				this.currentValue = groupValue.includes(this.label)
+			},
+			// EvanCheckboxGroup组件直接设置当前checkbox的值
+			directSetValue(value) {
+				let parent = this.getParent()
+				if (parent) {
+					if (value !== this.currentValue) {
+						parent.onCheckboxChange(this.label, false)
+					}
+				}
+			},
+			// EvanCheckboxGroup组件直接反向设置当前checkbox的值
+			reverseValue() {
+				let parent = this.getParent()
+				if (parent) {
+					parent.onCheckboxChange(this.label, false)
+				}
 			}
 		},
 		created() {
@@ -188,7 +208,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.evan-checkbox {
 		/* #ifndef APP-NVUE */
 		display: flex;
