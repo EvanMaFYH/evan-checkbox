@@ -105,7 +105,7 @@ export default{
 | disabled | 是否禁用 | boolean | - | false |
 | primary-color | 主题色 | string | - | #108ee9 |
 | icon | 自定义图标，使用uni-icons的图标 | string | - | - |
-| icon-size | 图标的大小 | number | - | 20 |
+| icon-size | 图标的大小 | number | - | 16 |
 | title-style | 复选框文本样式 | object | - | - |
 | prevent-click | 阻止内部的点击事件，只在自定义样式由外部触发toggle事件时设置为true | boolean | - | false |
 
