@@ -95,52 +95,52 @@
 			<text class="evan-checkbox-show__title__item">popup模式基本用法</text>
 		</view>
 
-		<evan-checkbox-popup1 @confirm="onConfirm" @objConfirm="onObjConfirm" @cancel="onCancel" v-model="colorPopup1"
+		<evan-checkbox-popup @confirm="onConfirm" @objConfirm="onObjConfirm" @cancel="onCancel" v-model="colorPopup1"
 		 :options="colorList">
 			<template v-slot:trigger="{label}">
 				<view>{{label||'请选择'}}</view>
 			</template>
-		</evan-checkbox-popup1>
+		</evan-checkbox-popup>
 
 		<view class="evan-checkbox-show__title">
 			<text class="evan-checkbox-show__title__item">popup模式自定义颜色</text>
 		</view>
 
-		<evan-checkbox-popup2 primaryColor="#00a231" @confirm="onConfirm" v-model="colorPopup2" :options="colorList">
+		<evan-checkbox-popup primaryColor="#00a231" @confirm="onConfirm" v-model="colorPopup2" :options="colorList">
 			<template v-slot:trigger="{label}">
 				<view>{{label||'请选择'}}</view>
 			</template>
-		</evan-checkbox-popup2>
+		</evan-checkbox-popup>
 
 		<view class="evan-checkbox-show__title">
 			<text class="evan-checkbox-show__title__item">popup模式限制最多选中个数</text>
 		</view>
 
-		<evan-checkbox-popup3 :max="3" @confirm="onConfirm" v-model="colorPopup3" :options="colorList">
+		<evan-checkbox-popup :max="3" @confirm="onConfirm" v-model="colorPopup3" :options="colorList">
 			<template v-slot:trigger="{label}">
 				<view>{{label||'请选择'}}</view>
 			</template>
-		</evan-checkbox-popup3>
+		</evan-checkbox-popup>
 
 		<view class="evan-checkbox-show__title">
 			<text class="evan-checkbox-show__title__item">popup模式自定义分隔符</text>
 		</view>
 
-		<evan-checkbox-popup4 labelSeparator="/" @confirm="onConfirm" v-model="colorPopup4" :options="colorList">
+		<evan-checkbox-popup labelSeparator="/" @confirm="onConfirm" v-model="colorPopup4" :options="colorList">
 			<template v-slot:trigger="{label}">
 				<view>{{label||'请选择'}}</view>
 			</template>
-		</evan-checkbox-popup4>
+		</evan-checkbox-popup>
 
 		<view class="evan-checkbox-show__title">
 			<text class="evan-checkbox-show__title__item">popup模式全选反选清空</text>
 		</view>
 
-		<evan-checkbox-popup5 ref="cPopup" @confirm="onConfirm" v-model="colorPopup5" :options="colorList">
+		<evan-checkbox-popup ref="cPopup" @confirm="onConfirm" v-model="colorPopup5" :options="colorList">
 			<template v-slot:trigger="{label}">
 				<view>{{label||'请选择'}}</view>
 			</template>
-		</evan-checkbox-popup5>
+		</evan-checkbox-popup>
 
 		<button @tap="popupSelectAll">全选</button>
 		<button @tap="popupSelectReverse">反选</button>
@@ -172,21 +172,7 @@
 </template>
 
 <script>
-	import EvanCheckboxPopup from '@/components/evan-checkbox-popup/evan-checkbox-popup.vue'
-	import EvanCheckboxPopup1 from '@/components/evan-checkbox-popup/evan-checkbox-popup.vue'
-	import EvanCheckboxPopup2 from '@/components/evan-checkbox-popup/evan-checkbox-popup.vue'
-	import EvanCheckboxPopup3 from '@/components/evan-checkbox-popup/evan-checkbox-popup.vue'
-	import EvanCheckboxPopup4 from '@/components/evan-checkbox-popup/evan-checkbox-popup.vue'
-	import EvanCheckboxPopup5 from '@/components/evan-checkbox-popup/evan-checkbox-popup.vue'
 	export default {
-		components: {
-			EvanCheckboxPopup,
-			EvanCheckboxPopup1,
-			EvanCheckboxPopup2,
-			EvanCheckboxPopup3,
-			EvanCheckboxPopup4,
-			EvanCheckboxPopup5
-		},
 		data() {
 			return {
 				checked: true,

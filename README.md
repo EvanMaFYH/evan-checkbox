@@ -76,25 +76,7 @@ export default{
 
 #### 3.demo项目需要安装依赖，记得先npm install，因为加入了与EvanForm组件配合使用的例子
 
-#### 4.EvanCheckboxPopup中使用到了解构插槽，目前uniapp似乎在这一块问题还比较多，如果要在同一个页面使用多个EvanCheckboxPopup组件时记得要import多个，不然目前slot中的内容的样式除了第一个都会被最后一个影响，预计官方在下个版本修复，参考[这里](https://github.com/dcloudio/uni-app/issues/1662)
-```
-<evan-checkbox-popup></evan-checkbox-popup>
-<evan-checkbox-popup2></evan-checkbox-popup2>
-<evan-checkbox-popup3></evan-checkbox-popup3>
-
-import EvanCheckboxPopup from '@/components/evan-checkbox/evan-checkbox-popup.vue'
-import EvanCheckboxPopup2 from '@/components/evan-checkbox/evan-checkbox-popup.vue'
-import EvanCheckboxPopup3 from '@/components/evan-checkbox/evan-checkbox-popup.vue'
-export default{
-    components:{
-        EvanCheckboxGroup,
-        EvanCheckboxPopup2,
-        EvanCheckboxPopup3
-    }
-}
-```
-
-#### 5.如果层级出现问题去调一下uniPopup组件的层级试试（uniPopup组件推荐将popup写在其他元素后面，但是目前是在组件中的，因此如果嵌套比较深可能无法弹出）
+#### 4.如果层级出现问题去调一下uniPopup组件的层级试试（uniPopup组件推荐将popup写在其他元素后面，但是目前是在组件中的，因此如果嵌套比较深可能无法弹出）
 
 ### evan-checkbox props
 | 参数           | 说明            | 类型    | 可选值     | 默认值  |    

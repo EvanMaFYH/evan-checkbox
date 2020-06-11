@@ -78,7 +78,7 @@
 				if (this.isGroup) {
 					let parent = this.getParent()
 					if (parent.max) {
-						let parentValue = parent.value || []
+						let parentValue = parent.currentValue || []
 						if (parentValue.length >= parent.max) {
 							return true
 						}

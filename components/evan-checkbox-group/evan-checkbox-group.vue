@@ -50,6 +50,7 @@
 				} else {
 					value.push(label)
 				}
+				this.currentValue = value
 				this.$emit('input', value)
 				if (flag) {
 					this.$emit('change', value)
