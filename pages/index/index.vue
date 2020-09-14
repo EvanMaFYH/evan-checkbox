@@ -82,6 +82,21 @@
 			</view>
 		</evan-checkbox-group>
 		<view class="evan-checkbox-show__title">
+			<text class="evan-checkbox-show__title__item">自定义样式列表复选框组（直接v-deep修改样式）</text>
+		</view>
+		<view class="custom-checkbox">
+			<evan-checkbox-group v-model="color5">
+				<evan-checkbox :label="item.value" v-for="item in colorList" :key="item.value">
+					{{item.label}}
+					<template slot="icon">
+						<view>
+							<uni-icons v-if="showIcon(item.value)" type="checkmarkempty" size="25" color="#108ee9"></uni-icons>
+						</view>
+					</template>
+				</evan-checkbox>
+			</evan-checkbox-group>
+		</view>
+		<view class="evan-checkbox-show__title">
 			<text class="evan-checkbox-show__title__item">自定义样式列表复选框组二(最多选择三个)</text>
 		</view>
 		<evan-checkbox-group :max="3" @change="onGroupChange" v-model="color3">
@@ -188,6 +203,7 @@
 				color2: ['blue'],
 				color3: null,
 				color4: null,
+				color5: null,
 				colorPopup1: null,
 				colorPopup2: null,
 				colorPopup3: null,
@@ -289,6 +305,9 @@
 			popupClearAll() {
 				this.$refs.cPopup.clearAll()
 				console.log(this.colorPopup5)
+			},
+			showIcon(value) {
+				return this.color5 && this.color5.includes(value)
 			}
 		},
 		mounted() {
@@ -356,6 +375,20 @@
 
 		.evan-checkbox-popup {
 			width: 100%;
+		}
+
+		.custom-checkbox {
+			::v-deep {
+				.evan-checkbox {
+					height: 50px;
+					border-bottom: 1px solid #eee;
+					flex-direction: row-reverse;
+
+					&__label {
+						flex: 1;
+					}
+				}
+			}
 		}
 	}
 </style>
